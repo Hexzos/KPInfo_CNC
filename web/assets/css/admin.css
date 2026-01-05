@@ -1,0 +1,311 @@
+/* web/assets/css/admin.css */
+
+/* =========================
+   Layout: scroll interno admin
+   ========================= */
+
+.main {
+  /* Asegura que el panel admin tenga scroll propio */
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* La zona que scrollea es el contenido */
+.content {
+  overflow: auto;
+  flex: 1 1 auto;
+}
+
+/* Contenedor del admin */
+
+
+.admin-tabs {
+  width: 100%;
+  max-width: none;
+  justify-content: flex-start;
+}
+
+
+/* =========================
+   Tabs (admin-tabs) con <a>
+   ========================= */
+
+.admin-tabs {
+  background: #fafafa;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 10px 16px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  position: sticky;
+ 
+}
+
+.admin-tab {
+  background: #fff;
+  border: 1px solid #bdbdbd;
+  padding: 7px 10px;
+  font-size: 13px;
+  border-radius: 2px;
+  color: #111;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+}
+
+.admin-tab:hover {
+  background: #f0f0f0;
+  border-color: #9e9e9e;
+}
+
+/* activo por hash (admin.js lo aplica) */
+.admin-tab.is-active {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+/* =========================
+   Cards / secciones
+   ========================= */
+
+.admin-panels {
+  padding: 16px;
+}
+
+.admin-card {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 2px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.admin-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.admin-card__title {
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.admin-card__sub {
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* Msg */
+.msg {
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+/* =========================
+   Actions / search
+   ========================= */
+
+.admin-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.admin-actions--row {
+  align-items: center;
+}
+
+.admin-search {
+  height: 36px;
+  border: 1px solid #bdbdbd;
+  border-radius: 2px;
+  padding: 0 10px;
+  font-size: 13px;
+  min-width: 240px;
+}
+
+/* =========================
+   Tables
+   ========================= */
+
+.admin-table-wrap {
+  overflow: auto;
+  border: 1px solid #e6e6e6;
+  border-radius: 2px;
+  margin-top: 10px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.admin-table thead th {
+  text-align: left;
+  background: #fafafa;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 10px;
+  font-weight: 800;
+}
+
+.admin-table td {
+  border-bottom: 1px solid #f0f0f0;
+  padding: 10px;
+  vertical-align: top;
+}
+
+/* =========================
+   Grid catálogos
+   ========================= */
+
+.admin-grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+@media (max-width: 900px) {
+  .admin-grid2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.admin-minihead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.admin-minihead__title {
+  font-weight: 800;
+}
+
+.admin-minihead__actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* =========================
+   Badge
+   ========================= */
+
+#adminBadge.estado-pill {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =========================
+   NUEVO: Acciones por fila (Editar/Eliminar)
+   ========================= */
+
+.admin-row-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* si la columna es angosta, que no “explote” */
+.admin-row-actions .btn {
+  white-space: nowrap;
+}
+
+/* =========================
+   NUEVO: Panel Variaciones asignadas (inyectado por admin.js)
+   Opción 1: CRUD variaciones + panel de asignación abajo
+   ========================= */
+
+#varAssignPanel {
+  border: 1px solid #e6e6e6;
+  border-radius: 2px;
+  background: #fafafa;
+}
+
+#varAssignPanel label {
+  color: #111;
+}
+
+#varAssignPanel .admin-search {
+  min-width: 220px; /* un poco más flexible que el global */
+}
+
+#varAssignPanel .msg {
+  margin-top: 10px;
+}
+
+/* Botones del panel en pantallas chicas */
+@media (max-width: 700px) {
+  #varAssignPanel .admin-search {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+/* =========================
+   MODALES (Admin) - FIX overlay + centrado
+   Compatible con patrón modal detalle
+   ========================= */
+
+/* Overlay único, cubre todo */
+#overlay.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 1000;
+}
+
+/* Modal como capa fija centrada */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1001;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 18px;
+}
+
+/* Card del modal: tamaño y scroll interno */
+.modal .modal__card {
+  width: min(720px, calc(100vw - 24px));
+  max-height: calc(100vh - 24px);
+  overflow: auto;
+
+  background: #fff;
+  border-radius: 2px;
+  border: 1px solid #e6e6e6;
+}
+
+/* Header del modal fijo visualmente */
+.modal .modal__header {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  z-index: 1;
+}
+
+/* Cuando un modal está abierto, evita scroll “raro” en el layout */
+body.modal-open {
+  overflow: hidden;
+}

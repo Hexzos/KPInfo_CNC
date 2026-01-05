@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KPInfo CNC - Inicio</title>
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+</head>
+<body>
+
+  <header class="login-topbar">
+    <div class="login-topbar__inner">
+      <div class="login-brand">
+        <div class="login-brand__title">KPInfo</div>
+        <div class="login-brand__subtitle">Sistema de registros para máquinas CNC</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="login-wrap">
+    <section class="login-panel">
+      <form id="loginForm" class="login-form" novalidate>
+        <div class="field">
+          <label for="nombre">Nombre</label>
+          <input
+            id="nombre"
+            class="js-login-nombre"
+            type="text"
+            placeholder="Ingrese su nombre"
+            minlength="2"
+            required
+            autocomplete="given-name"
+          />
+          <div class="help" data-err="operador_nombre"></div>
+        </div>
+
+        <div class="field">
+          <label for="apellido">Apellido</label>
+          <input
+            id="apellido"
+            class="js-login-apellido"
+            type="text"
+            placeholder="Ingrese su apellido"
+            minlength="2"
+            required
+            autocomplete="family-name"
+          />
+          <div class="help" data-err="operador_apellido"></div>
+        </div>
+
+        <div class="field">
+          <label for="clave">Clave</label>
+          <input
+            id="clave"
+            class="js-login-clave"
+            type="password"
+            placeholder="Ingrese la clave de acceso"
+            autocomplete="current-password"
+            required
+          />
+          <div class="help" data-err="clave"></div>
+        </div>
+
+        <button
+          type="submit"
+          class="btn login-btn js-login-submit"
+        >
+          Ingresar<br><span>al sistema</span>
+        </button>
+
+        <p class="login-note">
+          La clave define el acceso como operador o administrador.
+        </p>
+        
+
+        <p id="msg" class="msg js-login-msg" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="/assets/js/core.js"></script>
+  <script src="/assets/js/login.js"></script>
+  <script>
+    window.KPINIT && window.KPINIT.initLogin && window.KPINIT.initLogin();
+  </script>
+</body>
+</html>

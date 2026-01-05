@@ -1,0 +1,62 @@
+/* web/assets/css/modal-anomalia-detalle.css */
+
+.modal-anomalia-det .modal__card {
+  max-width: 920px;
+}
+
+.anom-det-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.2fr;
+  gap: 18px;
+  margin-top: 10px;
+  align-items: start;
+}
+
+.anom-det-col .det-label {
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.det-val {
+  margin: 2px 0;
+}
+
+.anom-det-col--estado {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+}
+
+.btn--sm {
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+.anom-det-section {
+  margin-top: 18px;
+}
+
+.det-title {
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.det-text {
+  white-space: pre-wrap;
+  line-height: 1.35;
+}
+
+.anom-det-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.anom-det-right {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  min-width: 180px;
+}

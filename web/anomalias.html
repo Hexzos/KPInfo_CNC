@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KPInfo CNC - Anomalías</title>
+
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/css/modal-pedido.css" />
+  <link rel="stylesheet" href="/assets/css/modal-detalle.css" />
+</head>
+
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar__brand">
+        <div class="sidebar__title">KPInfo</div>
+      </div>
+
+      <nav class="sidebar__nav" aria-label="Navegación">
+        <a id="navAdmin" class="navlink" href="/admin.html" hidden>Administración</a>
+        <a class="navlink" href="/pedidos.html">Pedidos</a>
+        <a class="navlink" href="/anomalias.html">Anomalías</a>
+        <a class="navlink" href="/exportar.html">Exportar datos</a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <button id="btnSalir" class="btn btn--light">Salir del registro</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar__left">
+          <h1 class="page-title">Anomalías</h1>
+        </div>
+
+        <div class="topbar__right">
+          <div class="admin-lista">
+            <label for="listaSel">Lista</label>
+            <select id="listaSel">
+              <option value="general">General</option>
+              <option value="en_revision">En revisión</option>
+              <option value="solucionado">Solucionadas</option>
+
+              <option value="archivado" hidden>Archivadas</option>
+            </select>
+          </div>
+
+         <button id="btnExtras" class="iconbtn" title="Opciones extras" aria-label="Opciones extras">
+            <svg class="icon-extras" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M19.14 12.94c.04-.31.06-.63.06-.94s-.02-.63-.06-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.1 7.1 0 0 0-1.63-.94l-.36-2.54A.5.5 0 0 0 13.9 1h-3.8a.5.5 0 0 0-.49.42l-.36 2.54c-.58.23-1.12.54-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.7 7.48a.5.5 0 0 0 .12.64L4.85 9.7c-.04.31-.06.63-.06.94s.02.63.06.94L2.82 14.52a.5.5 0 0 0-.12.64l1.92 3.32c.13.23.4.32.64.22l2.39-.96c.5.4 1.05.72 1.63.94l.36 2.54c.04.24.25.42.49.42h3.8c.24 0 .45-.18.49-.42l.36-2.54c.58-.23 1.12-.54 1.63-.94l2.39.96c.24.1.51.01.64-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58zM12 15.5A3.5 3.5 0 1 1 12 8a3.5 3.5 0 0 1 0 7.5z"/>
+            </svg>
+          </button>
+
+        </div>
+      </header>
+
+      <section class="content">
+        <div class="searchbar">
+          <input id="q" type="search" placeholder="Buscar por título, descripción, máquina o fecha" />
+        </div>
+
+        <div id="emptyState" class="empty">
+          No hay anomalías registradas, ingrese una para continuar.
+        </div>
+
+        <div id="cards" class="cards" hidden></div>
+
+        <template id="anomaliaTpl">
+          <article class="pedido-card" data-id="">
+            <div class="pedido-card__grid">
+              <div class="pedido-col">
+                <div class="pedido-code" data-titulo></div>
+                <div class="pedido-desc" data-desc></div>
+              </div>
+
+              <div class="pedido-col">
+                <div class="pedido-label">Registrado en</div>
+                <div class="pedido-val" data-turno></div>
+                <div class="pedido-val" data-fecha></div>
+              </div>
+
+              <div class="pedido-col">
+                <div class="pedido-label">Máquina asignada</div>
+                <div class="pedido-val" data-maquina></div>
+              </div>
+
+              <div class="pedido-col pedido-col--estado">
+                <div class="pedido-label">Estado</div>
+                <div class="estado-pill" data-estado></div>
+              </div>
+            </div>
+          </article>
+        </template>
+      </section>
+
+      <button id="fabCrear" class="fab" aria-label="Crear anomalía" title="Crear anomalía">+</button>
+    </main>
+  </div>
+
+  <div id="overlay" class="overlay" hidden></div>
+
+  <!-- Modal Crear -->
+  <section id="modalAnomalia" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalAnomaliaTitle" hidden>
+    <div class="modal__card">
+      <header class="modal__header">
+        <h2 id="modalAnomaliaTitle">Nueva anomalía</h2>
+        <button id="btnCerrarModalAnomalia" class="iconbtn iconbtn--flat" aria-label="Cerrar">✖</button>
+      </header>
+
+      <form id="formAnomalia" class="form-grid" novalidate>
+        <div class="field">
+          <label>Fecha</label>
+          <div id="anomaliaFecha" class="readonly">—</div>
+        </div>
+
+        <div class="field field--center">
+          <label for="turnoSel">Turno *</label>
+          <select id="turnoSel" required>
+            <option value="" selected disabled>Seleccione un turno</option>
+          </select>
+          <div class="help" data-err="turno_id"></div>
+        </div>
+
+        <div class="field">
+          <label for="maquinaSel">Máquina asignada *</label>
+          <select id="maquinaSel" required>
+            <option value="" selected disabled>Seleccione la máquina CNC</option>
+          </select>
+          <div class="help" data-err="maquina_id"></div>
+        </div>
+
+        <div class="field field--wide">
+          <label for="tituloAnomalia">Nombre del problema *</label>
+          <input id="tituloAnomalia" type="text" placeholder="Ej: Fuga de aire" required />
+          <div class="help" data-err="titulo"></div>
+        </div>
+
+        <div class="field field--wide">
+          <label for="descAnomalia">Descripción *</label>
+          <textarea id="descAnomalia" rows="4"
+            placeholder="Describe el incidente con el mayor detalle posible"
+            required></textarea>
+          <div class="help" data-err="descripcion"></div>
+        </div>
+
+        <div class="actions field--wide">
+          <button id="btnGenerarAnomalia" type="submit" class="btn btn--primary">Generar anomalía</button>
+          <div id="anomaliaMsg" class="msg"></div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Modal Detalle -->
+  <section id="modalAnomaliaDetalle" class="modal modal-detalle" role="dialog" aria-modal="true"
+           aria-labelledby="modalDetalleTitle" hidden>
+    <div class="modal__card modal-detalle__card">
+      <header class="modal-detalle__header">
+        <div>
+          <h2 id="modalDetalleTitle" class="modal-detalle__title">
+            Anomalía&nbsp;<span data-det="titulo"></span>
+          </h2>
+          <div class="modal-detalle__subtitle">
+            Registrado en: <span data-det="turno_nombre"></span> · <span data-det="fecha_registro"></span>
+            · Máquina: <span data-det="maquina_nombre"></span>
+          </div>
+        </div>
+        <button id="btnCerrarModalDetalle" class="iconbtn iconbtn--close" aria-label="Cerrar">✖</button>
+      </header>
+
+      <div class="modal-detalle__grid">
+        <div class="det-block" style="grid-column: 1 / -1;">
+          <div class="det-label">Descripción del problema</div>
+          <div class="det-val" data-det="descripcion" style="white-space:pre-wrap; line-height:1.35;"></div>
+        </div>
+
+        <!-- Estado: RO + select hidden disabled -->
+        <div class="det-block">
+          <div class="det-label">Estado</div>
+
+          <div id="roEstado" class="det-val" data-ro="estado">—</div>
+
+          <select id="detEstado" class="det-select" disabled hidden>
+            <option value="en_revision">En revisión</option>
+            <option value="solucionado">Solucionado</option>
+          </select>
+
+          <button id="btnModEstado" class="btn btn--light btn--xs" type="button">Modificar</button>
+        </div>
+
+        <!-- Solución: RO + textarea hidden disabled -->
+        <div class="det-block" style="grid-column: span 3;">
+          <div class="det-label">Solución</div>
+
+          <div id="roSolucion" class="det-val" data-ro="solucion" style="white-space:pre-wrap; line-height:1.35;">—</div>
+
+          <textarea
+            id="detSolucion"
+            class="det-input"
+            rows="4"
+            disabled
+            hidden
+            style="width:100%;"
+            placeholder="Añada la solución para marcar como solucionado (mínimo 10 caracteres)."
+          ></textarea>
+
+          <button id="btnAddSolucion" class="btn btn--light btn--xs" type="button">Añadir solución</button>
+        </div>
+      </div>
+
+      <div class="modal-detalle__footer">
+        <div id="detalleMsg" class="msg"></div>
+
+        <button id="btnArchivarAnomalia" class="btn btn--light" type="button" hidden>Archivar</button>
+        <button id="btnRestaurarAnomalia" class="btn btn--light" type="button" hidden>Restaurar</button>
+
+        <button id="btnGuardarDetalle" class="btn btn--primary" type="button" disabled>Guardar</button>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="/assets/js/core.js"></script>
+  <script src="/assets/js/nav.js"></script>
+  <script src="/assets/js/extras.js"></script>
+  <script src="/assets/js/cierre_modal.js"></script>
+  <script src="/assets/js/anomalias.list.js"></script>
+  <script src="/assets/js/anomalias.modal.crear.js"></script>
+  <script src="/assets/js/anomalias.modal.detalle.js"></script>
+  <script src="/assets/js/anomalias.js"></script>
+
+  <script>
+    window.KPINIT && window.KPINIT.guard && window.KPINIT.guard();
+
+    // Sidebar: link “Administración” si corresponde (si usas nav.js)
+    window.KP && window.KP.nav && window.KP.nav.initAdminLink && window.KP.nav.initAdminLink();
+
+    // Marca activo en sidebar
+    window.KPINIT && window.KPINIT.initNavActive && window.KPINIT.initNavActive();
+
+    // Extras + cierre (si existen)
+    window.KP && window.KP.extras && window.KP.extras.initAll && window.KP.extras.initAll();
+    window.KP && window.KP.cierre && window.KP.cierre.initAll && window.KP.cierre.initAll();
+
+    // ✅ Esto es lo importante:
+    window.KP && window.KP.anomalias && window.KP.anomalias.initAll && window.KP.anomalias.initAll();
+  </script>
+
+
+</body>
+</html>

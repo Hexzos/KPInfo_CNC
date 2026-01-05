@@ -1,0 +1,186 @@
+/* =========================
+   Modal / Overlay (Nuevo pedido / anomalías)
+========================= */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  z-index: 50;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  z-index: 60;
+}
+
+.modal__card {
+  width: min(1100px, 100%);
+  max-height: calc(100vh - 40px);
+  overflow: auto;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #d0d0d0;
+  box-shadow: 0 10px 30px rgba(0,0,0,.18);
+  padding: 18px 14px 20px 18px;
+}
+
+.modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.iconbtn--flat {
+  border: none;
+  background: transparent;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* =========================
+   Readonly
+========================= */
+.readonly {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border: 1px solid #bdbdbd;
+  border-radius: 2px;
+  background: #f7f7f7;
+  font-size: 13px;
+}
+
+/* =========================
+   Form grid (alineado)
+========================= */
+.form-grid{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px 24px;
+  align-items: start;
+}
+
+
+.form-grid .field textarea{
+  grid-column: 1 / -1;
+}
+
+
+.form-grid .field--textarea {
+  grid-column: span 2;
+}
+
+
+.field{
+  display: grid;
+  gap: 8px;
+}
+
+.field label{
+  font-weight: 700;
+  font-size: 13px;
+  color: #111;
+}
+
+.field select,
+.field input{
+  width: 100%;
+  height: 44px;
+  border: 1px solid #bdbdbd;
+  border-radius: 2px;
+  padding: 10px 12px;
+  font-size: 13px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.field textarea{
+  width: 100%;
+  min-height: 88px;
+  resize: vertical;
+  border: 1px solid #bdbdbd;
+  border-radius: 2px;
+  padding: 10px 12px;
+  font-size: 13px;
+  box-sizing: border-box;
+}
+
+/* ✅ spans semánticos */
+.field--wide { grid-column: 1 / -1; }
+.field--span2 { grid-column: span 2; }
+
+/* ✅ elimina el “center” rígido: aquí solo se usa si de verdad lo necesitas */
+.field--center{
+  justify-self: stretch;
+  width: auto;
+}
+
+/* Descripción: que respire y se alinee */
+#descripcionProducto{
+  min-width: 0;      /* ✅ crítico para grids */
+  max-width: 100%;
+}
+
+/* Secciones */
+.section-label{
+  grid-column: 1 / -1;
+  font-weight: 800;
+  margin-top: 6px;
+  padding-top: 10px;
+  border-top: 1px solid #e3e3e3;
+}
+
+/* Ayuda / errores */
+.help {
+  min-height: 14px;
+  font-size: 12px;
+  color: #b00020;
+}
+
+/* Acciones */
+.actions{
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ✅ el mensaje se queda a la izquierda y ocupa el espacio */
+.actions .msg{
+  order: 1;
+  flex: 1;
+  text-align: left;
+  margin: 0;
+}
+
+/* ✅ el botón se va al extremo derecho */
+.actions .btn{
+  order: 2;
+  margin-left: auto;
+}
+
+.btn--primary {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .field--span2 { grid-column: 1 / -1; } /* en 2 cols, mejor full */
+}
+
+@media (max-width: 760px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .field--span2 { grid-column: 1 / -1; }
+}

@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Editor / OS
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Base de datos (recomendado NO subirla)
+cnc.sqlite3
+*.sqlite3
+*.db
+
+# Exportaciones
+*.csv
+exports/

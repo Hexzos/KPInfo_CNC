@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KPInfo CNC - Exportar datos</title>
+
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/css/exportar.css" />
+</head>
+
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar__brand">
+        <div class="sidebar__title">KPInfo</div>
+      </div>
+
+      <nav class="sidebar__nav" aria-label="Navegación">
+        <a id="navAdmin" class="navlink" href="/admin.html" hidden>Administración</a>
+        <a class="navlink" href="/pedidos.html">Pedidos</a>
+        <a class="navlink" href="/anomalias.html">Anomalías</a>
+        <a class="navlink" href="/exportar.html">Exportar datos</a>
+      </nav>
+
+      <div class="sidebar__footer">
+        <button id="btnSalir" class="btn btn--light">Salir del registro</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar__left">
+          <h1 class="page-title">Exportar datos</h1>
+        </div>
+
+        <div class="topbar__right">
+          <button id="btnExtras" class="iconbtn" title="Opciones extras" aria-label="Opciones extras">
+            <svg class="icon-extras" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M19.14 12.94c.04-.31.06-.63.06-.94s-.02-.63-.06-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.1 7.1 0 0 0-1.63-.94l-.36-2.54A.5.5 0 0 0 13.9 1h-3.8a.5.5 0 0 0-.49.42l-.36 2.54c-.58.23-1.12.54-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.7 7.48a.5.5 0 0 0 .12.64L4.85 9.7c-.04.31-.06.63-.06.94s.02.63.06.94L2.82 14.52a.5.5 0 0 0-.12.64l1.92 3.32c.13.23.4.32.64.22l2.39-.96c.5.4 1.05.72 1.63.94l.36 2.54c.04.24.25.42.49.42h3.8c.24 0 .45-.18.49-.42l.36-2.54c.58-.23 1.12-.54 1.63-.94l2.39.96c.24.1.51.01.64-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58zM12 15.5A3.5 3.5 0 1 1 12 8a3.5 3.5 0 0 1 0 7.5z"/>
+            </svg>
+          </button>
+
+        </div>
+      </header>
+
+      <section class="content export">
+        <div class="export-card">
+          <div class="export-card__header">
+            <h2 class="export-title">Rango de exportación</h2>
+            <p class="export-subtitle muted">Seleccione un rango de fechas para generar el CSV.</p>
+          </div>
+
+          <div class="export-grid">
+            <div class="export-field">
+              <label for="desdeFecha">Desde</label>
+              <input id="desdeFecha" type="date" />
+              <div class="help" data-err="desde"></div>
+            </div>
+
+            <div class="export-field">
+              <label for="hastaFecha">Hasta</label>
+              <input id="hastaFecha" type="date" />
+              <div class="help" data-err="hasta"></div>
+            </div>
+          </div>
+
+          <div class="export-actions">
+            <button id="btnExportPedidos" class="btn btn--primary" type="button">Exportar registro de pedidos</button>
+            <button id="btnExportAnomalias" class="btn btn--light" type="button">Exportar registro de anomalías</button>
+          </div>
+
+          <div id="exportMsg" class="msg export-msg"></div>
+
+          <div class="export-note">
+            Exportaciones mensuales y anuales requieren opciones extras activas.
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/assets/js/core.js"></script>
+  <script src="/assets/js/extras.js"></script>
+  <script src="/assets/js/cierre_modal.js"></script>
+  <script src="/assets/js/exportar.js"></script>
+
+  <script>
+    window.KPINIT && window.KPINIT.guard && window.KPINIT.guard();
+    window.KPINIT && window.KPINIT.initNavActive && window.KPINIT.initNavActive();
+    window.KP && window.KP.extras && window.KP.extras.initAll && window.KP.extras.initAll();
+    window.KP && window.KP.cierre && window.KP.cierre.initAll && window.KP.cierre.initAll();
+    window.KP && window.KP.exportar && window.KP.exportar.initAll && window.KP.exportar.initAll();
+  </script>
+
+</body>
+</html>

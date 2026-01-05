@@ -1,0 +1,103 @@
+/* =========================
+   Exportar datos (layout)
+========================= */
+
+.export{
+  max-width: 980px;
+}
+
+/* Card principal */
+.export-card{
+  margin-top: 18px;
+  background: #fff;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  padding: 18px 18px 16px 18px;
+}
+
+.export-card__header{
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #ededed;
+}
+
+.export-title{
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.export-subtitle{
+  margin: 6px 0 0 0;
+  font-size: 12px;
+}
+
+/* Grid de fechas */
+.export-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 22px;
+  align-items: end;
+  margin-top: 14px;
+}
+
+.export-field{
+  display: grid;
+  gap: 8px;
+}
+
+.export-field label{
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.export-field input{
+  height: 38px;
+  border: 1px solid #bdbdbd;
+  border-radius: 2px;
+  padding: 0 10px;
+  font-size: 13px;
+  background: #fff;
+  width: 100%;
+  max-width: 280px;
+}
+
+/* Acciones */
+.export-actions{
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid #ededed;
+}
+
+/* Mensaje */
+.export-msg{
+  margin-top: 10px;
+  text-align: left;
+  min-height: 18px;
+}
+
+/* Nota */
+.export-note{
+  margin-top: 14px;
+  font-size: 13px;
+  color: #555;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 760px){
+  .export-grid{
+    grid-template-columns: 1fr;
+  }
+  .export-field input{
+    max-width: 100%;
+  }
+  .export-actions{
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
