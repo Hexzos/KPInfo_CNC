@@ -1,5 +1,3 @@
-# KPInfo_CNC
-
 ## KPInfo CNC v1.0 (Legacy / MVP Intranet)
 
 Sistema Web de Registro de Producción CNC desarrollado como **MVP inicial**, orientado a ejecución **local o en red interna (intranet)**, sin dependencias de frameworks.
